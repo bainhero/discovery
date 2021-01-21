@@ -1,0 +1,25 @@
+modLoader="javafml" #mandatory
+loaderVersion="[35,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="All rights reserved"
+
+[[mods]] #mandatory
+modId="discovery" #mandatory
+version="1.0" #mandatory
+displayName="Discovery" #mandatory
+credits="Thanks for this example mod goes to Java" #optional
+authors="BainHero, AraliHero" #optional
+description='''
+
+'''
+[[dependencies.discovery]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[35,)" #mandatory
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.discovery]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.4,1.17)"
+    ordering="NONE"
+    side="BOTH"
