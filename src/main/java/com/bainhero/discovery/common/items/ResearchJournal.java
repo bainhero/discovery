@@ -46,7 +46,10 @@ public class ResearchJournal extends Item{
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		if(researchReady == false){
 			setResearchReady(true);
+			System.out.println("Success!");
 		}
+		System.out.println("Test.");
+		// OPEN GUI
 		return ActionResult.resultSuccess(playerIn.getHeldItem(handIn));
 	}
 }
