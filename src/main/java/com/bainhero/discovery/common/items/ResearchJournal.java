@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.lwjgl.glfw.GLFW;
 
+import com.bainhero.discovery.core.util.DataUtil;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.client.util.InputMappings;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
@@ -21,15 +24,12 @@ import net.minecraftforge.api.distmarker.Dist;
 
 public class ResearchJournal extends Item{
 	
-	private static boolean researchReady = false;
+	public static final String TAG_PLAYER_BOOK = DataUtil.prefix("used_book");
 	
 	public ResearchJournal(Properties properties) {
 		super(properties);
 	}
 	
-	public void setResearchReady(boolean condition) {
-		researchReady = condition;
-	}
 	
 	@Override
 	@OnlyIn(Dist.CLIENT)
@@ -44,9 +44,12 @@ public class ResearchJournal extends Item{
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-		if(researchReady == false){
-			setResearchReady(true);
-			System.out.println("Success!");
+		CompoundNBT playerData = playerIn.getPersistentData();
+		CompoundNBT data = DataUtil.getTagSafe(playerData, TAG_PLAYER_BOOK);
+		if(!data.getBoolean(TAG_PLAYER_BOOK)) {
+			data.putBoolean(TAG_PLAYER_BOOK, true);
+			playerData.put(PlayerEntity.PERSISTED_NBT_TAG, data);
+			System.out.println("Debug check success!");
 		}
 		System.out.println("Test.");
 		// OPEN GUI

@@ -26,6 +26,7 @@ public class Discovery
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new EventHandler());
     }
 
     private void setup(final FMLCommonSetupEvent event)
